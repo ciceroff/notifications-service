@@ -16,7 +16,7 @@ export class NotificationsController {
   ) {}
 
   @Patch(':id/cancel')
-  async cancel(@Param('id') id: string) {
+  async cancel(@Param('id') id: string): Promise<void> {
     await this.cancelNotification.execute({ notificationId: id });
   }
 
@@ -26,7 +26,7 @@ export class NotificationsController {
       recipientId: id,
     });
 
-    return notifications;
+    return { notifications: notifications.map(NotificationViewModel.toHTTP) };
   }
 
   @Get('count/from/:id')
