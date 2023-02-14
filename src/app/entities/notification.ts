@@ -8,6 +8,7 @@ interface NotificationProps {
   category: string;
   readAt?: Date | null;
   createdAt: Date;
+  canceledAt?: Date | null;
 }
 
 export class Notification {
@@ -57,5 +58,13 @@ export class Notification {
 
   public get id(): string {
     return this._id;
+  }
+
+  public get canceledAt(): Date | null | undefined {
+    return this.props.canceledAt;
+  }
+
+  public cancel() {
+    this.props.canceledAt = new Date();
   }
 }
